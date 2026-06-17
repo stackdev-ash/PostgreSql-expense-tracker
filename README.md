@@ -4,14 +4,9 @@ A simple Expense Tracker REST API built with Node.js, Express, TypeScript, and P
 
 ## Features
 
-* Create Expense
-* Get All Expenses
-* Get Expense By ID
-* Update Expense
-* Delete Expense
-* Search Expenses
-* Filter By Category
-* Sort Expenses
+* CRUD Operations
+* Search & Filter
+* Sorting
 * Pagination
 * Expense Statistics
 * Category Analytics
@@ -22,58 +17,14 @@ A simple Expense Tracker REST API built with Node.js, Express, TypeScript, and P
 * Express.js
 * TypeScript
 * PostgreSQL
-* pg
 
-## Installation
+## Run Locally
 
 ```bash
-git clone <repository-url>
-cd postgresql-expense-tracker
-
 npm install
-```
-
-Create a `.env` file:
-
-```env
-DATABASE_URL=postgresql://username:password@localhost:5432/expense_tracker
-PORT=5000
-```
-
-Run the server:
-
-```bash
 npm run dev
 ```
 
-## API Endpoints
+## Learning
 
-| Method | Endpoint                          |
-| ------ | --------------------------------- |
-| POST   | /expenses                         |
-| GET    | /expenses                         |
-| GET    | /expenses/:id                     |
-| PUT    | /expenses/:id                     |
-| DELETE | /expenses/:id                     |
-| GET    | /expenses/search?title=keyword    |
-| GET    | /expenses/filter?category=food    |
-| GET    | /expenses/sort?order=asc          |
-| GET    | /expenses/paginate?page=1&limit=5 |
-| GET    | /expenses/stats                   |
-| GET    | /expenses/analytics/category      |
-
-## Learning Outcomes
-
-This project helped me learn:
-
-* PostgreSQL CRUD Operations
-* SQL Queries
-* Filtering & Searching
-* Sorting & Pagination
-* Aggregate Functions
-* GROUP BY Queries
-* Express + PostgreSQL Integration
-* TypeScript Backend Development
-
-```
-```
+Built to learn PostgreSQL integration with Express, including SQL queries, filtering, pagination, aggregate functions, and analytics.
