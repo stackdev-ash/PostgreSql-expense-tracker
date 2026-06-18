@@ -13,17 +13,13 @@ export const getExpenses = async (req: Request, res: Response) => {
   }
 };
 
-export const getExpenseById = async (
-  req: Request,
-  res: Response
-) => {
+export const getExpenseById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const result = await pool.query(
-      "SELECT * FROM expenses WHERE id = $1",
-      [id]
-    );
+    const result = await pool.query("SELECT * FROM expenses WHERE e_id = $1", [
+      id,
+    ]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({
@@ -41,7 +37,7 @@ export const getExpenseById = async (
 
 export const createExpense = async (req: Request, res: Response) => {
   try {
-    const { title, amount, category } = req.body;
+    const { title, amount, category, u_id } = req.body;
 
     if (!title || !amount || !category) {
       return res.status(400).json({
@@ -50,10 +46,10 @@ export const createExpense = async (req: Request, res: Response) => {
     }
 
     const result = await pool.query(
-      `INSERT INTO expenses(title,amount,category)
-       VALUES($1,$2,$3)
-       RETURNING *`,
-      [title, amount, category],
+      `INSERT INTO expenses(title,amount,category,u_id)
+   VALUES($1,$2,$3,$4)
+   RETURNING *`,
+      [title, amount, category, u_id],
     );
 
     res.status(201).json(result.rows[0]);
@@ -64,10 +60,7 @@ export const createExpense = async (req: Request, res: Response) => {
   }
 };
 
-export const updateExpense = async (
-  req: Request,
-  res: Response
-) => {
+export const updateExpense = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -78,9 +71,9 @@ export const updateExpense = async (
        SET title = $1,
            amount = $2,
            category = $3
-       WHERE id = $4
+       WHERE e_id = $4
        RETURNING *`,
-      [title, amount, category, id]
+      [title, amount, category, id],
     );
 
     if (result.rows.length === 0) {
@@ -97,18 +90,15 @@ export const updateExpense = async (
   }
 };
 
-export const deleteExpense = async (
-  req: Request,
-  res: Response
-) => {
+export const deleteExpense = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
     const result = await pool.query(
       `DELETE FROM expenses
-       WHERE id = $1
+       WHERE e_id = $1
        RETURNING *`,
-      [id]
+      [id],
     );
 
     if (result.rows.length === 0) {
